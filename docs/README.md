@@ -10,7 +10,8 @@ Informações básicas do projeto.
     
     -   [Douglas Marçal de Freitas](https://github.com/douglasFreitas18)
     -   [Daniel Aguiar Pacheco](https://github.com/beltrano)
-    -   [Cicrano](https://github.com/cicrano)
+    -   [Pedro Pinho](https://github.com/p1nho0)
+    -   [Pedro Henrique Maia](https://github.com/pedrohomaia)
 
 A documentação do projeto é estruturada da seguinte forma:
 

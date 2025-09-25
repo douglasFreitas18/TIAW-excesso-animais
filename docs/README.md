@@ -12,6 +12,7 @@ Informações básicas do projeto.
     -   [Daniel Aguiar Pacheco](https://github.com/beltrano)
     -   [Pedro Pinho](https://github.com/p1nho0)
     -   [Pedro Henrique Maia](https://github.com/pedrohomaia)
+    -   [Renata Neves](https://github.com/renataneves-hub)
 
 A documentação do projeto é estruturada da seguinte forma:
 

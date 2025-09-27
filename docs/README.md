@@ -13,6 +13,7 @@ Informações básicas do projeto.
     -   [Pedro Pinho](https://github.com/p1nho0)
     -   [Pedro Henrique Maia](https://github.com/pedrohomaia)
     -   [Renata Neves](https://github.com/renataneves-hub)
+    -   [Ana Júlia de Sena Oliveira](https://github.com/Ana-Sena)
 
 A documentação do projeto é estruturada da seguinte forma:
 

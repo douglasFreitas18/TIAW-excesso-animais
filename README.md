@@ -1,6 +1,7 @@
-# Nome do projeto
+# AdotePet
+O projeto tem como objetivo desenvolver uma plataforma digital voltada para facilitar o processo de adoção responsável de animais. A solução busca conectar potenciais adotantes a protetores independentes, ONGs e órgãos públicos, oferecendo um ambiente seguro, transparente e intuitivo. Dessa forma, pretende-se reduzir o número de animais em situação de rua e incentivar práticas conscientes de adoção.
 
-Escreva um ou dois parágrafo resumindo o objetivo do seu projeto.
+Além de aproximar adotantes e protetores, a plataforma permitirá a divulgação organizada de informações relevantes sobre os animais, como idade, porte, histórico de saúde e comportamento. Assim, o sistema contribui para aumentar as chances de cada animal encontrar um lar adequado ao perfil do adotante, promovendo impacto social positivo e fortalecendo a comunidade em torno da causa da proteção animal.
 
 ## Alunos integrantes da equipe
 

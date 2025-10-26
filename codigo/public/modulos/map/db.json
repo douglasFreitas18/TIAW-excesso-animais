@@ -1,0 +1,61 @@
+{
+  "instituicoes": [
+    {
+      "id": 1,
+      "nome": "Centro de Controle de Zoonoses de Belo Horizonte",
+      "endereco": {
+        "rua": "Av. dos Animais",
+        "numero": "1234",
+        "bairro": "São Francisco",
+        "cidade": "Belo Horizonte",
+        "estado": "MG"
+      },
+      "telefone": "(31) 3333-4444",
+      "email": "contato@zoonosesbh.mg.gov.br",
+      "horario": "Seg-Sex 08:00-17:00 | Sáb 09:00-13:00",
+      "areaAtuacao": "Vacinação, Resgate, Castração, Adoção",
+      "coordenadas": {
+        "latitude": -19.86521,
+        "longitude": -43.95871
+      }
+    },
+    {
+      "id": 2,
+      "nome": "ONG Patas Unidas",
+      "endereco": {
+        "rua": "Rua das Flores",
+        "numero": "50",
+        "bairro": "Centro",
+        "cidade": "Contagem",
+        "estado": "MG"
+      },
+      "telefone": "(31) 98888-7777",
+      "email": "contato@patasunidas.org",
+      "horario": "Seg-Dom 09:00-18:00",
+      "areaAtuacao": "Adoção, Resgate, Lar Temporário",
+      "coordenadas": {
+        "latitude": -19.918,
+        "longitude": -44.08
+      }
+    },
+    {
+      "id": 3,
+      "nome": "Clínica Vet Vida – Unidade Centro",
+      "endereco": {
+        "rua": "Av. Paulista",
+        "numero": "1000",
+        "bairro": "Bela Vista",
+        "cidade": "São Paulo",
+        "estado": "SP"
+      },
+      "telefone": "(11) 4002-8922",
+      "email": "centro@vetvida.com.br",
+      "horario": "24h (Plantão)",
+      "areaAtuacao": "Clínica conveniada, vacinação antirrábica",
+      "coordenadas": {
+        "latitude": -23.56168,
+        "longitude": -46.65598
+      }
+    }
+  ]
+}

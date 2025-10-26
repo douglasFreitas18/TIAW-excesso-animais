@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Mapeamento de Instituições de Zoonoses - ZooPet</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🗺️ Mapeamento de Instituições de Zoonoses</h1>
+            <p>Encontre centros de controle de zoonoses próximos a você - ZooPet</p>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number" id="totalInstitutions">0</div>
+                <div class="stat-label">Instituições Cadastradas</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="selectedState">Todas</div>
+                <div class="stat-label">Estado Selecionado</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="selectedCity">Todas</div>
+                <div class="stat-label">Cidade Selecionada</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 Buscar por cidade ou bairro..."/>
+            </div>
+
+            <div class="filter-group">
+                <select id="stateFilter">
+                    <option value="">Todos os Estados</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                </select>
+
+                <select id="cityFilter">
+                    <option value="">Todas as Cidades</option>
+                </select>
+            </div>
+
+            <button class="btn btn-secondary" onclick="clearFilters()">Limpar Filtros</button>
+        </div>
+
+        <div class="content-wrapper">
+            <div id="map"></div>
+
+            <div class="sidebar">
+                <div id="institutionsList"></div>
+
+                <div id="detailPanel" class="detail-panel">
+                    <div class="detail-header">
+                        <h3 id="detailName"></h3>
+                        <button class="close-btn" onclick="closeDetail()">×</button>
+                    </div>
+                    <div class="detail-content">
+                        <div class="detail-row">
+                            <strong>Endereço:</strong>
+                            <span id="detailAddress"></span>
+                        </div>
+                        <div class="detail-row">
+                            <strong>Telefone:</strong>
+                            <span id="detailPhone"></span>
+                        </div>
+                        <div class="detail-row">
+                            <strong>E-mail:</strong>
+                            <span id="detailEmail"></span>
+                        </div>
+                        <div class="detail-row">
+                            <strong>Horário:</strong>
+                            <span id="detailSchedule"></span>
+                        </div>
+                        <div class="detail-row">
+                            <strong>Área de Atuação:</strong>
+                            <span id="detailArea"></span>
+                        </div>
+                        <button class="btn-route" onclick="openGoogleMaps()">📍 Traçar Rota no Google Maps</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

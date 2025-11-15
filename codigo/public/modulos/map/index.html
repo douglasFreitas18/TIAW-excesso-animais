@@ -1,95 +1,148 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Mapeamento de Instituições de Zoonoses - ZooPet</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-    <link rel="stylesheet" href="styles.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZooPet - Sistema de Avistamentos</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🗺️ Mapeamento de Instituições de Zoonoses</h1>
-            <p>Encontre centros de controle de zoonoses próximos a você - ZooPet</p>
+            <h1>🗺️ ZooPet - Sistema de Avistamentos</h1>
+            <p>Reporte animais de rua e ajude sua comunidade</p>
         </div>
-
-        <div class="stats">
-            <div class="stat-item">
-                <div class="stat-number" id="totalInstitutions">0</div>
-                <div class="stat-label">Instituições Cadastradas</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" id="selectedState">Todas</div>
-                <div class="stat-label">Estado Selecionado</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" id="selectedCity">Todas</div>
-                <div class="stat-label">Cidade Selecionada</div>
+        <div class="view-toggle">
+            <button class="toggle-btn active" id="btnViewMap">🗺️ Mapa de Avistamentos</button>
+            <button class="toggle-btn" id="btnViewList">📋 Meus Reportes</button>
+        </div>
+        <div id="viewMap" class="view-content active">
+            <div class="map-container">
+                <div id="map"></div>
             </div>
         </div>
-
-        <div class="controls">
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="🔍 Buscar por cidade ou bairro..."/>
+        <div id="viewList" class="view-content">
+            <div style="padding: 30px;">
+                <h2 style="color: #0066cc; margin-bottom: 20px;">📋 Meus Reportes</h2>
+                <div id="reportsList"></div>
             </div>
-
-            <div class="filter-group">
-                <select id="stateFilter">
-                    <option value="">Todos os Estados</option>
-                    <option value="MG">Minas Gerais</option>
-                    <option value="SP">São Paulo</option>
-                    <option value="RJ">Rio de Janeiro</option>
-                </select>
-
-                <select id="cityFilter">
-                    <option value="">Todas as Cidades</option>
-                </select>
-            </div>
-
-            <button class="btn btn-secondary" onclick="clearFilters()">Limpar Filtros</button>
         </div>
-
-        <div class="content-wrapper">
-            <div id="map"></div>
-
-            <div class="sidebar">
-                <div id="institutionsList"></div>
-
-                <div id="detailPanel" class="detail-panel">
-                    <div class="detail-header">
-                        <h3 id="detailName"></h3>
-                        <button class="close-btn" onclick="closeDetail()">×</button>
+    </div>
+    <div class="report-fab" id="reportFab">
+        <span class="report-fab-icon">📢</span>
+    </div>
+    <div id="reportModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📢 Reportar Avistamento</h3>
+                <button class="close-btn" id="closeModalBtn">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="success-message" id="successMessage">
+                    ✅ Avistamento reportado com sucesso!
+                </div>
+                <div class="step-indicator">
+                    <div class="step active" id="step1">1</div>
+                    <div class="step" id="step2">2</div>
+                    <div class="step" id="step3">3</div>
+                </div>
+                <div id="stepLocation" class="step-content">
+                    <h4 style="color: #0066cc; margin-bottom: 20px;">📍 Passo 1: Localização do Avistamento</h4>
+                    <div class="form-group">
+                        <label>Usar minha localização atual?</label>
+                        <button class="btn btn-primary" id="btnGetLocation">📍 Usar Localização Atual</button>
                     </div>
-                    <div class="detail-content">
-                        <div class="detail-row">
-                            <strong>Endereço:</strong>
-                            <span id="detailAddress"></span>
+                    <div style="text-align: center; margin: 15px 0; color: #999;">ou</div>
+                    <div class="form-group">
+                        <label>Endereço</label>
+                        <input type="text" id="endereco" placeholder="Ex: Rua das Flores, 123">
+                    </div>
+                    <div class="form-group">
+                        <label>Bairro *</label>
+                        <input type="text" id="bairro" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Cidade *</label>
+                        <input type="text" id="cidade" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Estado *</label>
+                        <select id="estado" required>
+                            <option value="">Selecione...</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-primary" id="btnNextStep2">Próximo →</button>
+                    </div>
+                </div>
+                <div id="stepAnimals" class="step-content" style="display: none;">
+                    <h4 style="color: #0066cc; margin-bottom: 20px;">🐾 Passo 2: Adicionar Animais</h4>
+                    <div class="animals-list" id="animalsList">
+                        <h4>Animais Adicionados (<span id="animalCount">0</span>)</h4>
+                        <div id="animalsContainer">
+                            <div class="empty-state">Nenhum animal adicionado ainda</div>
                         </div>
-                        <div class="detail-row">
-                            <strong>Telefone:</strong>
-                            <span id="detailPhone"></span>
+                    </div>
+                    <div class="form-section">
+                        <h4 style="color: #0066cc; margin-bottom: 15px;">➕ Adicionar Animal</h4>
+                        <div class="form-group">
+                            <label>Espécie *</label>
+                            <select id="especie">
+                                <option value="">Selecione...</option>
+                                <option value="Cachorro">🐕 Cachorro</option>
+                                <option value="Gato">🐈 Gato</option>
+                            </select>
                         </div>
-                        <div class="detail-row">
-                            <strong>E-mail:</strong>
-                            <span id="detailEmail"></span>
+                        <div class="form-group">
+                            <label>Porte *</label>
+                            <select id="porte">
+                                <option value="">Selecione...</option>
+                                <option value="Pequeno">Pequeno (até 10kg)</option>
+                                <option value="Médio">Médio (15-25kg)</option>
+                                <option value="Grande">Grande (acima de 35kg)</option>
+                            </select>
                         </div>
-                        <div class="detail-row">
-                            <strong>Horário:</strong>
-                            <span id="detailSchedule"></span>
+                        <div class="form-group">
+                            <label>Cor Primária *</label>
+                            <select id="corPrimaria">
+                                <option value="">Selecione...</option>
+                                <option value="Preto">Preto</option>
+                                <option value="Branco">Branco</option>
+                                <option value="Marrom">Marrom</option>
+                                <option value="Caramelo">Caramelo</option>
+                                <option value="Cinza">Cinza</option>
+                            </select>
                         </div>
-                        <div class="detail-row">
-                            <strong>Área de Atuação:</strong>
-                            <span id="detailArea"></span>
-                        </div>
-                        <button class="btn-route" onclick="openGoogleMaps()">📍 Traçar Rota no Google Maps</button>
+                        <button class="btn btn-add" id="btnAddAnimal">➕ Adicionar Animal</button>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-secondary" id="btnBackStep1">← Voltar</button>
+                        <button class="btn btn-primary" id="btnNextStep3">Próximo →</button>
+                    </div>
+                </div>
+                <div id="stepConfirm" class="step-content" style="display: none;">
+                    <h4 style="color: #0066cc; margin-bottom: 20px;">✅ Passo 3: Confirmar Avistamento</h4>
+                    <div class="location-info">
+                        <strong>📍 Localização:</strong>
+                        <span id="confirmLocation"></span>
+                    </div>
+                    <div class="animals-list">
+                        <h4>🐾 Animais Reportados (<span id="confirmAnimalCount">0</span>)</h4>
+                        <div id="confirmAnimalsContainer"></div>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-secondary" id="btnBackStep2">← Voltar</button>
+                        <button class="btn btn-success" id="btnSubmitReport">✅ Confirmar e Enviar</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>

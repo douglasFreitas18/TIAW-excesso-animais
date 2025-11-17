@@ -1,13 +1,154 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZooPet - Fórum Comunitário</title>
-<link rel="stylesheet" href="forum-styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZooPet - Fórum Comunitário</title>
+    <link rel="stylesheet" href="forum-styles.css">
 </head>
 <body>
-<!-- Conteúdo completo omitido aqui -->
-<script src="forum-script.js"></script>
+    <div class="container">
+        <div class="header">
+            <h1>💬 ZooPet - Fórum Comunitário</h1>
+            <p>Compartilhe avistamentos, denúncias e dicas sobre animais de rua</p>
+        </div>
+
+        <div class="forum-header">
+            <div class="forum-stats">
+                <div class="stat-box">
+                    <span class="stat-icon">📋</span>
+                    <div>
+                        <div class="stat-number" id="totalTopics">0</div>
+                        <div class="stat-label">Tópicos</div>
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-icon">💬</span>
+                    <div>
+                        <div class="stat-number" id="totalReplies">0</div>
+                        <div class="stat-label">Respostas</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <select id="tipoFilter">
+                    <option value="">Todos os tipos</option>
+                    <option value="avistamento">🔍 Avistamento</option>
+                    <option value="denuncia">⚠️ Denúncia</option>
+                    <option value="ajuda">🆘 Ajuda</option>
+                    <option value="dica">💡 Dica/Orientação</option>
+                </select>
+                <button class="btn btn-secondary" id="btnClearFilter">Limpar Filtro</button>
+            </div>
+        </div>
+
+        <div class="novo-topico-container">
+            <button class="btn btn-primary btn-toggle" id="btnToggleForm">
+                ➕ Criar Novo Tópico
+            </button>
+            
+            <div class="novo-topico-form" id="novoTopicoForm" style="display: none;">
+                <h3>✍️ Novo Tópico</h3>
+                <form id="forumForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="autorForum">Seu nome *</label>
+                            <input type="text" id="autorForum" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tipoTopico">Tipo *</label>
+                            <select id="tipoTopico" required>
+                                <option value="">Selecione...</option>
+                                <option value="avistamento">🔍 Avistamento</option>
+                                <option value="denuncia">⚠️ Denúncia</option>
+                                <option value="ajuda">🆘 Pedido de Ajuda</option>
+                                <option value="dica">💡 Dica/Orientação</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="tituloForum">Título *</label>
+                        <input type="text" id="tituloForum" required placeholder="Ex: Cachorro abandonado na Rua X">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="mensagemForum">Mensagem *</label>
+                        <textarea id="mensagemForum" rows="4" required placeholder="Descreva o que você observou, onde foi, detalhes importantes..."></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bairroForum">Bairro *</label>
+                            <input type="text" id="bairroForum" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cidadeForum">Cidade *</label>
+                            <input type="text" id="cidadeForum" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="estadoForum">Estado *</label>
+                            <select id="estadoForum" required>
+                                <option value="">Selecione...</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="btnCancelForm">Cancelar</button>
+                        <button type="submit" class="btn btn-success">📤 Publicar Tópico</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="forum-container">
+            <div id="forumTopics" class="forum-topics">
+                <div class="empty-state">
+                    <span style="font-size: 48px;">💬</span>
+                    <p>Nenhum tópico publicado ainda.</p>
+                    <p style="color: #999;">Seja o primeiro a compartilhar!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal do Tópico -->
+    <div id="topicModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTopicTitle">Tópico</h3>
+                <button class="close-btn" id="btnCloseModal">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="topic-info">
+                    <span id="modalAutor"></span>
+                    <span id="modalData"></span>
+                    <span id="modalLocation"></span>
+                </div>
+                <div id="modalMensagem" class="topic-message"></div>
+
+                <div class="replies-section">
+                    <h4>💬 Respostas (<span id="replyCount">0</span>)</h4>
+                    <div id="repliesList" class="replies-list"></div>
+
+                    <div class="reply-form">
+                        <h4>✍️ Adicionar resposta</h4>
+                        <input type="text" id="replyAutor" class="reply-input" placeholder="Seu nome">
+                        <textarea id="replyMensagem" class="reply-textarea" rows="3" placeholder="Escreva sua resposta..."></textarea>
+                        <div class="form-actions">
+                            <button class="btn btn-primary" type="button" id="btnAddReply">📤 Enviar Resposta</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="forum-script.js"></script>
 </body>
 </html>

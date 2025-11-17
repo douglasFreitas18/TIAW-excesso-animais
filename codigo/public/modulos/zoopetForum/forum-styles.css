@@ -1,1 +1,516 @@
-/* CSS completo omitido aqui */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f8ff;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 20px 60px rgba(0, 102, 204, 0.15);
+    overflow: hidden;
+    border: 2px solid #0066cc;
+}
+
+.header {
+    background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+    padding: 30px;
+    color: white;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.header p {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+/* Forum Header */
+.forum-header {
+    padding: 25px;
+    background: #e0f0ff;
+    border-bottom: 2px solid #0066cc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.forum-stats {
+    display: flex;
+    gap: 20px;
+}
+
+.stat-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    border: 2px solid #0066cc;
+}
+
+.stat-icon {
+    font-size: 28px;
+}
+
+.stat-number {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0066cc;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #666;
+}
+
+.filter-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Botões */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: #0066cc;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #0052a3;
+}
+
+.btn-secondary {
+    background: white;
+    color: #0066cc;
+    border: 2px solid #0066cc;
+}
+
+.btn-secondary:hover {
+    background: #0066cc;
+    color: white;
+}
+
+.btn-success {
+    background: #28a745;
+    color: white;
+}
+
+.btn-success:hover {
+    background: #218838;
+}
+
+.btn-toggle {
+    width: 100%;
+    font-size: 16px;
+    padding: 15px;
+}
+
+/* Formulário Novo Tópico */
+.novo-topico-container {
+    padding: 25px;
+    background: #f0f8ff;
+    border-bottom: 2px solid #0066cc;
+}
+
+.novo-topico-form {
+    margin-top: 20px;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    border: 2px solid #0066cc;
+}
+
+.novo-topico-form h3 {
+    color: #0066cc;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    color: #0066cc;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #0066cc;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    background: white;
+    transition: all 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #ff6b35;
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+/* Lista de Tópicos */
+.forum-container {
+    padding: 25px;
+}
+
+.forum-topics {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.topic-card {
+    background: white;
+    border: 2px solid #e0f0ff;
+    border-radius: 12px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.topic-card:hover {
+    border-color: #0066cc;
+    box-shadow: 0 5px 15px rgba(0, 102, 204, 0.1);
+    transform: translateY(-2px);
+}
+
+.topic-type {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.topic-type.avistamento {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.topic-type.denuncia {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.topic-type.ajuda {
+    background: #fff3e0;
+    color: #e65100;
+}
+
+.topic-type.dica {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.topic-card h3 {
+    color: #0066cc;
+    font-size: 18px;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.topic-preview {
+    color: #004d99;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.topic-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 13px;
+    color: #666;
+}
+
+.topic-author,
+.topic-date,
+.topic-location {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.reply-count {
+    background: #0066cc;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    overflow: auto;
+}
+
+.modal.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 20px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    border: 3px solid #0066cc;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+    color: white;
+    padding: 20px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 17px 17px 0 0;
+}
+
+.modal-header h3 {
+    font-size: 20px;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    color: white;
+    transition: transform 0.2s;
+    line-height: 1;
+}
+
+.close-btn:hover {
+    transform: scale(1.2);
+}
+
+.modal-body {
+    padding: 25px;
+}
+
+.topic-info {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e0f0ff;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: #666;
+}
+
+.topic-message {
+    color: #004d99;
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    white-space: pre-wrap;
+}
+
+/* Respostas */
+.replies-section {
+    border-top: 2px solid #e0f0ff;
+    padding-top: 20px;
+}
+
+.replies-section h4 {
+    color: #0066cc;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.replies-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.reply-item {
+    background: #f0f8ff;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #0066cc;
+}
+
+.reply-author {
+    font-weight: 600;
+    color: #0066cc;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.reply-text {
+    color: #004d99;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    white-space: pre-wrap;
+}
+
+.reply-date {
+    font-size: 11px;
+    color: #999;
+}
+
+.reply-form {
+    background: #f0f8ff;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #0066cc;
+}
+
+.reply-form h4 {
+    color: #0066cc;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.reply-input,
+.reply-textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #0066cc;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    margin-bottom: 10px;
+}
+
+.reply-input:focus,
+.reply-textarea:focus {
+    outline: none;
+    border-color: #ff6b35;
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 60px 30px;
+    color: #666;
+}
+
+.empty-state p {
+    margin-top: 15px;
+    font-size: 16px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .forum-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .forum-stats {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .stat-box {
+        width: 100%;
+    }
+
+    .filter-group {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .filter-group select,
+    .filter-group button {
+        width: 100%;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-group {
+        min-width: 100%;
+    }
+
+    .modal-content {
+        width: 95%;
+        max-height: 95vh;
+    }
+
+    .topic-meta {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
